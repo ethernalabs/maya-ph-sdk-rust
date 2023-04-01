@@ -21,7 +21,7 @@ pub mod payment_gateway {
   ) -> Result<reqwest::Response, reqwest::Error> {
       
     let client = reqwest::Client::new();
-    let path = format!("{}{}", &base_url, "/payments/v1/payment-tokens");
+    let path: String = format!("{}{}", &base_url, "/payments/v1/payment-tokens");
 
   
     let res = client.post(&path).json(&card).send().await?;
