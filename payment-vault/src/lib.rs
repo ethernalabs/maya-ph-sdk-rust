@@ -4,7 +4,9 @@ use serde::{Deserialize, Serialize};
 pub mod payment_gateway {
   use super::*;
 
+  
   #[derive(Debug, Serialize, Deserialize)]
+  #[allow(non_snake_case)]
   pub struct Card {
       pub number: String,
       pub expYear: String,
