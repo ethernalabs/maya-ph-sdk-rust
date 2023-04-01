@@ -1,4 +1,5 @@
-use maya_sdk_rust::payment_gateway::payment_token::payment_token;
+use maya_sdk_rust::payment_gateway;
+
 #[cfg(test)]
 mod test_payment_token {
     use super::*;
@@ -11,7 +12,7 @@ mod test_payment_token {
 
     #[test]
     fn create_payment_token() {
-        let result = payment_token(
+        let result = payment_gateway::create_payment_token(
             BASE_URL.to_string(),
             NUMBER.to_string(),
             EXP_YEAR.to_string(),
