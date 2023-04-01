@@ -1,3 +1,6 @@
+## Work in progress
+This SDK is under development. 
+
 ## License
 
 The MIT License (MIT)
