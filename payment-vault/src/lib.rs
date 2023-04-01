@@ -1,16 +1,15 @@
-use reqwest::Error;
 use serde::{Deserialize, Serialize};
 
 
-mod payment_gateway {
+pub mod payment_gateway {
   use super::*;
 
   #[derive(Debug, Serialize, Deserialize)]
   pub struct Card {
-      number: String,
-      expYear: String,
-      expMonth: String,
-      cvv: String,
+      pub number: String,
+      pub expYear: String,
+      pub expMonth: String,
+      pub cvv: String,
   }
   
   #[tokio::main]
