@@ -8,7 +8,7 @@ pub struct MayaClient {}
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct MayaAuthToken {
-    token: String,
+    pub token: String,
 }
 
 impl MayaClient {
