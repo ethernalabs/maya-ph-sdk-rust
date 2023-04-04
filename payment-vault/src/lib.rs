@@ -1,17 +1,12 @@
-use base64::{
-    alphabet,
-    engine::{self, general_purpose},
-    Engine as _,
-};
+use async_trait::async_trait;
+use maya_client_sdk::MayaClient;
 use reqwest::{
     header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
-    Client, Response,
+    Response,
 };
 use serde::Serialize;
 
 pub mod payment_gateway {
-    const CUSTOM_ENGINE: engine::GeneralPurpose =
-        engine::GeneralPurpose::new(&alphabet::URL_SAFE, general_purpose::NO_PAD);
 
     use super::*;
 
@@ -29,38 +24,17 @@ pub mod payment_gateway {
         pub card: CardDetails,
     }
 
-    pub struct MayaClient {
-        client: Client,
-        url_domain: String,
-        auth_header: String,
+    #[async_trait]
+    pub trait PaymentGateway {
+        async fn create_payment_token(
+            &self,
+            card_details: CardDetails,
+        ) -> Result<Response, Box<dyn std::error::Error>>;
     }
 
-    impl MayaClient {
-        pub fn new(username: String, password: String, url_domain: Option<String>) -> Self {
-            let auth_header = Self::generate_auth_header_value(&username, &password);
-            let client = Client::new();
-
-            let domain = match url_domain {
-                Some(v) => v,
-                None => "pg-sandbox.paymaya.com".to_string(),
-            };
-            MayaClient {
-                client,
-                auth_header,
-                url_domain: domain,
-            }
-        }
-
-        fn generate_auth_header_value(username: &str, password: &str) -> String {
-            let mut token = String::new();
-            let token_format = format!("{}:{}", username, password);
-
-            CUSTOM_ENGINE.encode_string(&token_format.as_bytes(), &mut token);
-
-            return token;
-        }
-
-        pub async fn create_payment_token(
+    #[async_trait]
+    impl PaymentGateway for MayaClient {
+        async fn create_payment_token(
             &self,
             card_details: CardDetails,
         ) -> Result<Response, Box<dyn std::error::Error>> {
@@ -81,7 +55,5 @@ pub mod payment_gateway {
 
             Ok(response)
         }
-
-        pub async fn create_payment() -> () {}
     }
 }

@@ -1,5 +1,5 @@
 [package]
-name = "maya-payment-vault-sdk"
+name = "maya-client-sdk"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,7 +7,4 @@ edition = "2021"
 
 [dependencies]
 reqwest = { version = "0.11.16", features = ["json"] }
-serde = { version = "1.0.159", features = ["derive"]}
-tokio = { version = "1", features = ["full"] }
-maya-client-sdk = { path = "../client" }
-async-trait = "0.1.68"
+base64 = { version = "0.21.0" }
