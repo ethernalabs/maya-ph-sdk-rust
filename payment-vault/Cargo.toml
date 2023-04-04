@@ -9,4 +9,4 @@ edition = "2021"
 reqwest = { version = "0.11.16", features = ["blocking", "json"] }
 serde = { version = "1.0.159", features = ["derive"]}
 tokio = { version = "1", features = ["full"] }
-maya-client-sdk = { version = "0.1.0", path = "../client"}
+base64 = { version = "0.21.0" }
