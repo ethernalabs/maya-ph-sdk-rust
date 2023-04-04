@@ -20,7 +20,7 @@ pub mod payment_gateway {
     }
 
     #[derive(Debug, Serialize)]
-    pub struct Card {
+    struct Card {
         pub card: CardDetails,
     }
 
