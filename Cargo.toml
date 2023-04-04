@@ -3,5 +3,4 @@
 members = [
   "payment-vault",
   "client"
-
 ]
