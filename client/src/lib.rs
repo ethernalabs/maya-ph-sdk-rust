@@ -28,7 +28,7 @@ impl MayaClient {
     ///
     /// It takes a parameter username, password, and url_domain to generate and return a MayaClient
     /// which can be used to send a request to the domain given in the parameter. The *url_domain*
-    /// is an Option<String> which the user can use to set the domain of the API endpoint.
+    /// is an Option`<String>` which the user can use to set the domain of the API endpoint.
     ///
     /// ```rust,no_run
     /// use maya_client_sdk::MayaClient;

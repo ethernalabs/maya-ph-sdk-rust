@@ -36,5 +36,7 @@ mod test_payment_token {
     }
 
     #[tokio::test]
-    async fn create_payment() {}
+    async fn create_payment() {
+        todo!();
+    }
 }
