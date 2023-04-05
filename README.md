@@ -1,5 +1,8 @@
 ## Work in progress
-This SDK is under development. 
+
+This SDK is under development.
+
+This repository contains Rust-based software development kit (SDK) for integrating with the Maya.ph platform.
 
 ## License
 
