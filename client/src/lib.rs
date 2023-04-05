@@ -1,3 +1,8 @@
+//! #MayaClient
+//!
+//! MayaClient creates and returns the url_domain and auth_header that is needed for API
+//! authentication allong side with a client that is based on reqwest::Client
+
 use reqwest::Client;
 
 use base64::{
@@ -6,6 +11,7 @@ use base64::{
     Engine as _,
 };
 
+#[derive(Debug)]
 pub struct MayaClient {
     pub client: Client,
     pub url_domain: String,
@@ -16,6 +22,18 @@ const CUSTOM_ENGINE: engine::GeneralPurpose =
     engine::GeneralPurpose::new(&alphabet::URL_SAFE, general_purpose::NO_PAD);
 
 impl MayaClient {
+    /// Creates a client from reqwest client and returns  client, auth_header and the url domain
+    /// for the client
+    /// ```
+    /// use maya_client_sdk::MayaClient;
+    ///
+    /// let maya_client = MayaClient::new(
+    ///   "username".to_string(),
+    ///   "password".to_string(),
+    ///   None
+    /// );
+    ///
+    /// ````
     pub fn new(username: String, password: String, url_domain: Option<String>) -> Self {
         let auth_header = Self::generate_auth_header_value(&username, &password);
         let client = Client::new();
@@ -31,12 +49,13 @@ impl MayaClient {
         }
     }
 
+    /// Generates and returns a base64 value by combining the username and password separated by a colon
     fn generate_auth_header_value(username: &str, password: &str) -> String {
         let mut token = String::new();
         let token_format = format!("{}:{}", username, password);
 
-        CUSTOM_ENGINE.encode_string(&token_format.as_bytes(), &mut token);
+        CUSTOM_ENGINE.encode_string(token_format.as_bytes(), &mut token);
 
-        return token;
+        token
     }
 }
