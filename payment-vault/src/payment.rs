@@ -15,6 +15,30 @@ struct Card {
     pub card: CardDetails,
 }
 
+#[derive(Debug)]
+pub enum ShippingType {
+    ST,
+    SD,
+}
+
+#[derive(Debug, Serialize)]
+#[allow(non_snake_case)]
+pub struct Address<T = ShippingType> {
+    pub line1: Option<String>,
+    pub line2: Option<String>,
+    pub city: Option<String>,
+    pub state: Option<String>,
+    pub zipCode: Option<String>,
+    // ISO 3166 aplha-2 notion of the country
+    pub countryCode: String,
+    pub firstName: Option<String>,
+    pub middleName: Option<String>,
+    pub lastName: Option<String>,
+    pub phone: Option<String>,
+    pub email: Option<String>,
+    pub shippingType: T,
+}
+
 #[async_trait]
 pub trait PaymentGateway {
     /// Returns a response that contains the paymentTokenId to be use for furhter transaction
@@ -26,6 +50,12 @@ pub trait PaymentGateway {
 
     /// Returns a respons that contains the details of the payment transaction
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
+}
+
+impl Address {
+    fn new(&self) -> Self {
+        todo!()
+    }
 }
 
 /// Implement the PaymentGateway trait to MayaClient
