@@ -78,13 +78,13 @@ pub struct ShippingAddress<T = ShippingType> {
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
 pub struct BillingAddress {
-    pub line1: Option<String>,
-    pub line2: Option<String>,
-    pub city: Option<String>,
-    pub state: Option<String>,
-    pub zipCode: Option<String>,
+    pub line1: String,
+    pub line2: String,
+    pub city: String,
+    pub state: String,
+    pub zipCode: String,
     // ISO 3166 alpha-2 notion of the country
-    pub countryCode: Option<String>,
+    pub countryCode: String,
 }
 
 #[derive(Debug, Serialize)]
