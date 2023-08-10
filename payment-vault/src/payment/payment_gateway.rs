@@ -2,20 +2,87 @@ use super::*;
 
 #[async_trait]
 pub trait PaymentGateway {
-    /// Returns a response that contains the paymentTokenId to be use for furhter transaction
+    /// Returns a response that contains the paymentTokenId to be use for further transaction
     /// to the API endpoint else an std::error:Error
     async fn create_payment_token(
         &self,
         card_details: CardDetails,
     ) -> Result<Response, Box<dyn std::error::Error>>;
 
-    /// Returns a respons that contains the details of the payment transaction
+    /// Returns a response that contains the details of the payment transaction
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
 }
+#[allow(non_snake_case)]
+impl ShippingAddress {
+    pub fn new() -> Self {
+        Self {
+            line1: todo!(),
+            line2: todo!(),
+            city: todo!(),
+            state: todo!(),
+            zipCode: todo!(),
+            countryCode: todo!(),
+            firstName: todo!(),
+            lastName: todo!(),
+            middleName: todo!(),
+            phone: todo!(),
+            email: todo!(),
+            shippingType: todo!(),
+        }
+    }
+}
+#[allow(non_snake_case)]
+impl BillingAddress {
+    pub fn new() -> Self {
+        Self {
+            line1: todo!(),
+            line2: todo!(),
+            city: todo!(),
+            state: todo!(),
+            zipCode: todo!(),
+            countryCode: todo!(),
+        }
+    }
+}
+#[allow(non_snake_case)]
+trait TraitName<T> {
+    fn new(
+        firstName: String,
+        middleName: Option<String>,
+        lastName: String,
+        birthday: String,
+        customerSince: String,
+        sex: T,
+        contact: ContactDetails,
+        billingAddress: BillingAddress,
+        shippingAddress: ShippingAddress,
+    ) -> Self;
+}
 
-impl Address {
-    fn new(&self) -> Self {
-        todo!()
+#[allow(non_snake_case)]
+impl<T> TraitName<T> for Buyer<T> {
+    fn new(
+        firstName: String,
+        middleName: Option<String>,
+        lastName: String,
+        birthday: String,
+        customerSince: String,
+        sex: T,
+        contact: ContactDetails,
+        billingAddress: BillingAddress,
+        shippingAddress: ShippingAddress,
+    ) -> Self {
+        Self {
+            firstName,
+            middleName,
+            lastName,
+            birthday,
+            customerSince,
+            sex,
+            contact,
+            billingAddress,
+            shippingAddress,
+        }
     }
 }
 
