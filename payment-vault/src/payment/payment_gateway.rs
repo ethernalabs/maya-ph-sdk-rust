@@ -64,47 +64,6 @@ impl BillingAddress {
         }
     }
 }
-#[allow(non_snake_case)]
-trait TraitName<T> {
-    fn new(
-        firstName: String,
-        middleName: Option<String>,
-        lastName: String,
-        birthday: String,
-        customerSince: String,
-        sex: T,
-        contact: ContactDetails,
-        billingAddress: BillingAddress,
-        shippingAddress: ShippingAddress,
-    ) -> Self;
-}
-
-#[allow(non_snake_case)]
-impl<T> TraitName<T> for Buyer<T> {
-    fn new(
-        firstName: String,
-        middleName: Option<String>,
-        lastName: String,
-        birthday: String,
-        customerSince: String,
-        sex: T,
-        contact: ContactDetails,
-        billingAddress: BillingAddress,
-        shippingAddress: ShippingAddress,
-    ) -> Self {
-        Self {
-            firstName,
-            middleName,
-            lastName,
-            birthday,
-            customerSince,
-            sex,
-            contact,
-            billingAddress,
-            shippingAddress,
-        }
-    }
-}
 
 /// Implement the PaymentGateway trait to MayaClient
 #[async_trait]
