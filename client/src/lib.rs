@@ -48,7 +48,7 @@ impl MayaClient {
             Some(v) => v,
             None => "pg-sandbox.paymaya.com".to_string(),
         };
-        MayaClient {
+        Self {
             client,
             auth_header,
             url_domain: domain,
