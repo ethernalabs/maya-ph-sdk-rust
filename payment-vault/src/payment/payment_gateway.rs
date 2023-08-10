@@ -14,20 +14,33 @@ pub trait PaymentGateway {
 }
 #[allow(non_snake_case)]
 impl ShippingAddress {
-    pub fn new() -> Self {
+    pub fn new(
+        line1: Option<String>,
+        line2: Option<String>,
+        city: Option<String>,
+        state: Option<String>,
+        zipCode: Option<String>,
+        countryCode: Option<String>,
+        firstName: String,
+        middleName: Option<String>,
+        lastName: Option<String>,
+        phone: Option<String>,
+        email: Option<String>,
+        shippingType: ShippingType,
+    ) -> Self {
         Self {
-            line1: todo!(),
-            line2: todo!(),
-            city: todo!(),
-            state: todo!(),
-            zipCode: todo!(),
-            countryCode: todo!(),
-            firstName: todo!(),
-            lastName: todo!(),
-            middleName: todo!(),
-            phone: todo!(),
-            email: todo!(),
-            shippingType: todo!(),
+            line1: line1,
+            line2: line2,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            countryCode: countryCode,
+            firstName: firstName,
+            lastName: lastName,
+            middleName: middleName,
+            phone: phone,
+            email: email,
+            shippingType: shippingType,
         }
     }
 }

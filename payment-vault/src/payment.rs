@@ -66,12 +66,12 @@ pub struct ShippingAddress<T = ShippingType> {
     pub state: Option<String>,
     pub zipCode: Option<String>,
     // ISO 3166 alpha-2 notion of the country
-    pub countryCode: String,
+    pub countryCode: Option<String>,
     pub firstName: String,
-    pub lastName: String,
-    pub middleName: String,
-    pub phone: String,
-    pub email: String,
+    pub lastName: Option<String>,
+    pub middleName: Option<String>,
+    pub phone: Option<String>,
+    pub email: Option<String>,
     shippingType: T,
 }
 
