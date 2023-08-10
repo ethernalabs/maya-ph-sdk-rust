@@ -60,19 +60,19 @@ pub struct RedirectUrl {
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
 pub struct ShippingAddress<T = ShippingType> {
-    pub line1: Option<String>,
-    pub line2: Option<String>,
-    pub city: Option<String>,
-    pub state: Option<String>,
-    pub zipCode: Option<String>,
+    pub line1: String,
+    pub line2: String,
+    pub city: String,
+    pub state: String,
+    pub zipCode: String,
     // ISO 3166 alpha-2 notion of the country
-    pub countryCode: Option<String>,
+    pub countryCode: String,
     pub firstName: String,
-    pub lastName: Option<String>,
-    pub middleName: Option<String>,
-    pub phone: Option<String>,
-    pub email: Option<String>,
-    shippingType: T,
+    pub lastName: String,
+    pub middleName: String,
+    pub phone: String,
+    pub email: String,
+    pub shippingType: T,
 }
 
 #[derive(Debug, Serialize)]
