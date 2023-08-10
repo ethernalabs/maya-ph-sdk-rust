@@ -6,5 +6,6 @@ use reqwest::{
 };
 use serde::Serialize;
 
-pub use self::payment::{CardDetails, PaymentGateway};
-mod payment;
+pub use self::payment::CardDetails;
+
+pub mod payment;
