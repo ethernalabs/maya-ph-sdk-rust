@@ -1,5 +1,6 @@
 use super::*;
 pub mod payment_gateway;
+
 /// Details for creating payment token
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
@@ -21,17 +22,20 @@ pub enum ShippingType {
     SD,
 }
 
+#[derive(Debug)]
 pub struct ContactDetails {
     pub phone: Option<String>,
     pub email: Option<String>
 }
 
+#[derive(Debug)]
 pub enum Sex {
-    "M",
-    "F"
+    M,
+    F
 }
 
 #[derive(Debug)]
+#[allow(non_snake_case)]
 pub struct Buyer<T = Sex> {
     pub firstName: String,
     pub middleName: Option<String>,
