@@ -1,8 +1,9 @@
 use maya_client_sdk::MayaClient;
+use maya_payment_vault_sdk::payment::{BillingAddress, ShippingAddress};
 use maya_payment_vault_sdk::{payment::payment_gateway::*, CardDetails};
-
 #[cfg(test)]
 mod test_payment_token {
+
     use super::*;
 
     const NUMBER: &str = env!("NUMBER");
@@ -37,6 +38,13 @@ mod test_payment_token {
 
     #[tokio::test]
     async fn create_payment() {
-        todo!();
+        let billingAddress = BillingAddress {
+            line1: "Street 123".to_string(),
+            line2: "Brgy. Poblacion".to_string(),
+            city: "Mandaluyong".to_string(),
+            state: "Philippines".to_string(),
+            zipCode: "2313".to_string(),
+            countryCode: "PH".to_string(),
+        };
     }
 }
