@@ -1,6 +1,5 @@
 use maya_client_sdk::MayaClient;
-use maya_payment_vault_sdk::CardDetails;
-use maya_payment_vault_sdk::payment::payment_gateway::*;
+use maya_payment_vault_sdk::{payment::payment_gateway::*, CardDetails};
 
 #[cfg(test)]
 mod test_payment_token {
