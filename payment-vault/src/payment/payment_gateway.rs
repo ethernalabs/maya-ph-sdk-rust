@@ -26,7 +26,8 @@ impl PaymentGateway for MayaClient {
     ///
     /// ```rust,no_run
     /// use maya_client_sdk::MayaClient;
-    /// use maya_payment_vault_sdk::{CardDetails, PaymentGateway};
+    /// use maya_payment_vault_sdk::payment::payment_gateway::*;
+    /// use maya_payment_vault_sdk::payment::*;
     ///
     ///
     /// #[tokio::test]

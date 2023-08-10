@@ -1,6 +1,6 @@
 use maya_client_sdk::MayaClient;
-use maya_payment_vault_sdk::payment::{BillingAddress, ShippingAddress};
-use maya_payment_vault_sdk::{payment::payment_gateway::*, CardDetails};
+use maya_payment_vault_sdk::payment::payment_gateway::*;
+use maya_payment_vault_sdk::payment::*;
 #[cfg(test)]
 mod test_payment_token {
 
@@ -38,7 +38,7 @@ mod test_payment_token {
 
     #[tokio::test]
     async fn create_payment() {
-        let billingAddress = BillingAddress {
+        let billing_address = BillingAddress {
             line1: "Street 123".to_string(),
             line2: "Brgy. Poblacion".to_string(),
             city: "Mandaluyong".to_string(),
