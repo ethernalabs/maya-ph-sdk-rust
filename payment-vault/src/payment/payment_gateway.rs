@@ -12,58 +12,6 @@ pub trait PaymentGateway {
     /// Returns a response that contains the details of the payment transaction
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
 }
-#[allow(non_snake_case)]
-impl ShippingAddress {
-    pub fn new(
-        line1: Option<String>,
-        line2: Option<String>,
-        city: Option<String>,
-        state: Option<String>,
-        zipCode: Option<String>,
-        countryCode: Option<String>,
-        firstName: String,
-        middleName: Option<String>,
-        lastName: Option<String>,
-        phone: Option<String>,
-        email: Option<String>,
-        shippingType: ShippingType,
-    ) -> Self {
-        Self {
-            line1: line1,
-            line2: line2,
-            city: city,
-            state: state,
-            zipCode: zipCode,
-            countryCode: countryCode,
-            firstName: firstName,
-            lastName: lastName,
-            middleName: middleName,
-            phone: phone,
-            email: email,
-            shippingType: shippingType,
-        }
-    }
-}
-#[allow(non_snake_case)]
-impl BillingAddress {
-    pub fn new(
-        line1: Option<String>,
-        line2: Option<String>,
-        city: Option<String>,
-        state: Option<String>,
-        zipCode: Option<String>,
-        countryCode: Option<String>,
-    ) -> Self {
-        Self {
-            line1: line1,
-            line2: line2,
-            city: city,
-            state: state,
-            zipCode: zipCode,
-            countryCode: countryCode,
-        }
-    }
-}
 
 /// Implement the PaymentGateway trait to MayaClient
 #[async_trait]
