@@ -46,14 +46,21 @@ impl ShippingAddress {
 }
 #[allow(non_snake_case)]
 impl BillingAddress {
-    pub fn new() -> Self {
+    pub fn new(
+        line1: Option<String>,
+        line2: Option<String>,
+        city: Option<String>,
+        state: Option<String>,
+        zipCode: Option<String>,
+        countryCode: Option<String>,
+    ) -> Self {
         Self {
-            line1: todo!(),
-            line2: todo!(),
-            city: todo!(),
-            state: todo!(),
-            zipCode: todo!(),
-            countryCode: todo!(),
+            line1: line1,
+            line2: line2,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            countryCode: countryCode,
         }
     }
 }

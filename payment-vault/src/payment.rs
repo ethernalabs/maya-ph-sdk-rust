@@ -84,7 +84,7 @@ pub struct BillingAddress {
     pub state: Option<String>,
     pub zipCode: Option<String>,
     // ISO 3166 alpha-2 notion of the country
-    pub countryCode: String,
+    pub countryCode: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
