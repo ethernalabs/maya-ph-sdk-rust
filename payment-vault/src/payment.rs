@@ -24,8 +24,8 @@ pub enum ShippingType {
 
 #[derive(Debug, Serialize)]
 pub struct ContactDetails {
-    pub phone: Option<String>,
-    pub email: Option<String>,
+    pub phone: String,
+    pub email: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -38,7 +38,7 @@ pub enum Sex {
 #[allow(non_snake_case)]
 pub struct Buyer<T = Sex> {
     pub firstName: String,
-    pub middleName: Option<String>,
+    pub middleName: String,
     pub lastName: String,
     pub birthday: String,
     // Birthday in ISO 8601 / RFC 3339 full-date format.

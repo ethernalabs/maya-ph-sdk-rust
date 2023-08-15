@@ -39,7 +39,7 @@ mod test_payment_token {
 
     #[tokio::test]
     async fn create_payment() {
-        let _billing_address = BillingAddress {
+        let billing_address = BillingAddress {
             line1: "Street 123".to_string(),
             line2: "Brgy. Poblacion".to_string(),
             city: "Mandaluyong".to_string(),
@@ -47,8 +47,7 @@ mod test_payment_token {
             zipCode: "2313".to_string(),
             countryCode: "PH".to_string(),
         };
-
-        let _shipping_address: ShippingAddress = ShippingAddress {
+        let shipping_address: ShippingAddress = ShippingAddress {
             line1: "Street 123".to_string(),
             line2: "Brgy. Poblacion".to_string(),
             city: "Mandaluyong".to_string(),
@@ -61,6 +60,23 @@ mod test_payment_token {
             email: "john.doe@example.com".to_string(),
             phone: "12345567889".to_string(),
             shippingType: ShippingType::ST,
+        };
+
+        let contact: ContactDetails = ContactDetails {
+            phone: "+639951234567".to_string(),
+            email: "sample@google.com".to_string(),
+        };
+
+        let _buyer_user: Buyer = Buyer {
+            billingAddress: billing_address,
+            shippingAddress: shipping_address,
+            firstName: "John".to_string(),
+            lastName: "Doe".to_string(),
+            middleName: "".to_string(),
+            birthday: "".to_string(),
+            customerSince: "".to_string(),
+            contact: contact,
+            sex: Sex::M,
         };
     }
 }
