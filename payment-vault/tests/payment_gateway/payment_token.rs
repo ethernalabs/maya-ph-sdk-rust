@@ -58,13 +58,24 @@ mod test_payment_token {
             lastName: "Doe".to_string(),
             middleName: "".to_string(),
             email: "john.doe@example.com".to_string(),
-            phone: "12345567889".to_string(),
+            phone: "+63(2)1234567890".to_string(),
             shippingType: ShippingType::ST,
         };
 
         let contact: ContactDetails = ContactDetails {
-            phone: "+639951234567".to_string(),
+            phone: "+63(2)1234567890".to_string(),
             email: "sample@google.com".to_string(),
+        };
+
+        let _redirect_url: RedirectUrl = RedirectUrl {
+            success: "https://www.merchantsite.com/success".to_string(),
+            failure: "https://www.merchantsite.com/failure".to_string(),
+            cancel: "https://www.merchantsite.com/cancel".to_string(),
+        };
+
+        let _total_amount: TotalAmount = TotalAmount {
+            amount: "100".to_string(),
+            currency: "PHP".to_string(),
         };
 
         let _buyer_user: Buyer = Buyer {

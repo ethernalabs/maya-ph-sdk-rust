@@ -52,9 +52,9 @@ pub struct Buyer<T = Sex> {
 
 #[derive(Debug, Serialize)]
 pub struct RedirectUrl {
-    pub success: Option<String>,
-    pub failure: Option<String>,
-    pub cancel: Option<String>,
+    pub success: String,
+    pub failure: String,
+    pub cancel: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -97,8 +97,28 @@ pub struct TotalAmount {
 
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
+pub struct PaymentFacilitator {
+    pub smi: String,
+    pub smn: String,
+    pub mci: String,
+    pub mpc: String,
+    pub mco: String,
+}
+
+#[derive(Debug, Serialize)]
+#[allow(non_snake_case)]
+pub struct MetaData {
+    pub subMerchantRequestReferenceNumber: String,
+    pub pf: PaymentFacilitator,
+}
+
+#[derive(Debug, Serialize)]
+#[allow(non_snake_case)]
 pub struct Payment {
     paymentTokenId: String,
     pub totalAmount: TotalAmount,
     pub buyer: Buyer,
+    pub redirectUrl: RedirectUrl,
+    pub requestReferenceNumber: String,
+    pub metadata: Option<MetaData>,
 }
