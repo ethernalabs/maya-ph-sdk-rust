@@ -13,6 +13,29 @@ pub trait PaymentGateway {
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
 }
 
+#[allow(non_snake_case)]
+impl Payment {
+    fn new(
+        paymentTokenId: String,
+        TotalAmount: TotalAmount,
+        buyer: Buyer,
+        redirectUrl: RedirectUrl,
+        requestReferenceNumber: String,
+        metadata: Option<MetaData>,
+    ) -> Payment {
+        Payment {
+            paymentTokenId: paymentTokenId.to_string(),
+            totalAmount: TotalAmount,
+            buyer: buyer,
+            redirectUrl: redirectUrl,
+            requestReferenceNumber: requestReferenceNumber.to_string(),
+            metadata: match metadata {
+                Some(x: MetaData) => Some(x),
+                None => None,
+            },
+        }
+    }
+}
 /// Implement the PaymentGateway trait to MayaClient
 #[async_trait]
 impl PaymentGateway for MayaClient {
