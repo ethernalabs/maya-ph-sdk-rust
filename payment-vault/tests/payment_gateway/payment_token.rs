@@ -122,5 +122,6 @@ mod test_payment_token {
         let create_payment = maya_client.create_payment(payment).await.unwrap();
         println!("{:?}", create_payment.text().await.unwrap());
         // assert_eq!(create_payment.status(), 200);
+        // remove assertion since the documentation points to a invalid endpoint
     }
 }
