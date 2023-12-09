@@ -120,8 +120,7 @@ mod test_payment_token {
             requestReferenceNumber: Some("332211".to_string()),
         };
         let create_payment = maya_client.create_payment(payment).await.unwrap();
-        println!("Created payment {:?}", create_payment);
-
-        // assert_eq!(create_payment.json(), 200);
+        println!("{:?}", create_payment.text().await.unwrap());
+        // assert_eq!(create_payment.status(), 200);
     }
 }

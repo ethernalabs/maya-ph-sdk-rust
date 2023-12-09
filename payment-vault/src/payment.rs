@@ -112,6 +112,7 @@ pub struct MetaData {
     pub pf: PaymentFacilitator,
 }
 
+#[skip_serializing_none]
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
 pub struct Payment {
