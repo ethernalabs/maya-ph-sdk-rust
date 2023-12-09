@@ -1,13 +1,12 @@
+use reqwest::{Error, Response};
+
 use super::*;
 
 #[async_trait]
 pub trait PaymentGateway {
     /// Returns a response that contains the paymentTokenId to be use for further transaction
     /// to the API endpoint else an std::error:Error
-    async fn create_payment_token(
-        &self,
-        card_details: CardDetails,
-    ) -> Result<Response, Box<dyn std::error::Error>>;
+    async fn create_payment_token(&self, card_details: CardDetails) -> Result<Response, Error>;
 
     /// Returns a response that contains the details of the payment transaction
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
@@ -24,15 +23,12 @@ impl Payment {
         metadata: Option<MetaData>,
     ) -> Payment {
         Payment {
-            paymentTokenId: paymentTokenId.to_string(),
+            paymentTokenId,
             totalAmount: TotalAmount,
-            buyer: buyer,
-            redirectUrl: redirectUrl,
-            requestReferenceNumber: requestReferenceNumber.to_string(),
-            metadata: match metadata {
-                Some(x: MetaData) => Some(x),
-                None => None,
-            },
+            buyer,
+            redirectUrl,
+            requestReferenceNumber,
+            metadata,
         }
     }
 }
@@ -80,26 +76,19 @@ impl PaymentGateway for MayaClient {
     ///
     ///
     /// ```
-    async fn create_payment_token(
-        &self,
-        card_details: CardDetails,
-    ) -> Result<Response, Box<dyn std::error::Error>> {
+    async fn create_payment_token(&self, card_details: CardDetails) -> Result<Response, Error> {
         let url = format!("https://{}/payments/v1/payment-tokens", self.url_domain);
         let auth = format!("Basic {}", &self.auth_header);
         let request_body = Card { card: card_details };
 
-        let response = self
-            .client
+        self.client
             .post(&url)
             .header(AUTHORIZATION, auth)
             .header(ACCEPT, "application/json")
             .header(CONTENT_TYPE, "application/json")
             .json(&request_body)
             .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(response)
+            .await
     }
 
     async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>> {
