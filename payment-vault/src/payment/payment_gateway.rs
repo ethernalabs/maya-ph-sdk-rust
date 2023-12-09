@@ -9,29 +9,9 @@ pub trait PaymentGateway {
     async fn create_payment_token(&self, card_details: CardDetails) -> Result<Response, Error>;
 
     /// Returns a response that contains the details of the payment transaction
-    async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>>;
+    async fn create_payment(&self, payment: Payment) -> Result<Response, Error>;
 }
 
-#[allow(non_snake_case)]
-impl Payment {
-    fn new(
-        paymentTokenId: String,
-        TotalAmount: TotalAmount,
-        buyer: Buyer,
-        redirectUrl: RedirectUrl,
-        requestReferenceNumber: String,
-        metadata: Option<MetaData>,
-    ) -> Payment {
-        Payment {
-            paymentTokenId,
-            totalAmount: TotalAmount,
-            buyer,
-            redirectUrl,
-            requestReferenceNumber,
-            metadata,
-        }
-    }
-}
 /// Implement the PaymentGateway trait to MayaClient
 #[async_trait]
 impl PaymentGateway for MayaClient {
@@ -91,7 +71,19 @@ impl PaymentGateway for MayaClient {
             .await
     }
 
-    async fn create_payment(&self) -> Result<Response, Box<dyn std::error::Error>> {
-        todo!();
+    async fn create_payment(&self, payment: Payment) -> Result<Response, Error> {
+        let url = format!("https://{}/payments/v1/payments", self.url_domain);
+
+        let auth = format!("Basic {}", &self.auth_header);
+        let request_body = payment;
+
+        self.client
+            .post(&url)
+            .header(AUTHORIZATION, auth)
+            .header(ACCEPT, "application/json")
+            .header(CONTENT_TYPE, "application/json")
+            .json(&request_body)
+            .send()
+            .await
     }
 }

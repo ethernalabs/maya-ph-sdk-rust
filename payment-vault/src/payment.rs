@@ -114,7 +114,7 @@ pub struct MetaData {
 
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
-struct Payment {
+pub struct Payment {
     paymentTokenId: String,
     totalAmount: TotalAmount,
     buyer: Buyer,
