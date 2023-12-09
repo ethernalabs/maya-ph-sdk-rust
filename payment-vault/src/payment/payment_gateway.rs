@@ -80,13 +80,16 @@ impl PaymentGateway for MayaClient {
         let auth = format!("Basic {}", &self.auth_header);
         let request_body = payment;
 
-        self.client
+        let res = self
+            .client
             .post(&url)
             .header(AUTHORIZATION, auth)
             .header(ACCEPT, "application/json")
             .header(CONTENT_TYPE, "application/json")
             .json(&request_body)
             .send()
-            .await
+            .await?;
+
+        Ok(res)
     }
 }
