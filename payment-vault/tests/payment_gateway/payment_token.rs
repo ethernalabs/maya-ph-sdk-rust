@@ -67,18 +67,18 @@ mod test_payment_token {
             email: "sample@google.com".to_string(),
         };
 
-        let _redirect_url: RedirectUrl = RedirectUrl {
+        let redirect_url: RedirectUrl = RedirectUrl {
             success: "https://www.merchantsite.com/success".to_string(),
             failure: "https://www.merchantsite.com/failure".to_string(),
             cancel: "https://www.merchantsite.com/cancel".to_string(),
         };
 
-        let _total_amount: TotalAmount = TotalAmount {
+        let total_amount: TotalAmount = TotalAmount {
             amount: "100".to_string(),
             currency: "PHP".to_string(),
         };
 
-        let _buyer_user: Buyer = Buyer {
+        let buyer_user: Buyer = Buyer {
             billingAddress: billing_address,
             shippingAddress: shipping_address,
             firstName: "John".to_string(),
@@ -89,5 +89,39 @@ mod test_payment_token {
             contact: contact,
             sex: Sex::M,
         };
+
+        let card_details = CardDetails {
+            number: NUMBER.to_string(),
+            expYear: EXP_YEAR.to_string(),
+            expMonth: EXP_MONTH.to_string(),
+            cvc: CVC.to_string(),
+        };
+
+        let maya_client = MayaClient::new(
+            env!("ACCESS_TOKEN").to_string(),
+            env!("SECRET_TOKEN").to_string(),
+            None,
+        );
+
+        let payment_token = maya_client
+            .create_payment_token(card_details)
+            .await
+            .unwrap()
+            .json::<PaymentToken>()
+            .await
+            .unwrap();
+
+        let payment = Payment {
+            paymentTokenId: payment_token.paymentTokenId,
+            totalAmount: total_amount,
+            buyer: Some(buyer_user),
+            redirectUrl: Some(redirect_url),
+            metadata: None,
+            requestReferenceNumber: Some("332211".to_string()),
+        };
+        let create_payment = maya_client.create_payment(payment).await.unwrap();
+        println!("Created payment {:?}", create_payment);
+
+        // assert_eq!(create_payment.json(), 200);
     }
 }

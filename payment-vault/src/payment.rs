@@ -115,10 +115,20 @@ pub struct MetaData {
 #[derive(Debug, Serialize)]
 #[allow(non_snake_case)]
 pub struct Payment {
-    paymentTokenId: String,
-    totalAmount: TotalAmount,
-    buyer: Buyer,
-    redirectUrl: RedirectUrl,
-    requestReferenceNumber: String,
-    metadata: Option<MetaData>,
+    pub paymentTokenId: String,
+    pub totalAmount: TotalAmount,
+    pub buyer: Option<Buyer>,
+    pub redirectUrl: Option<RedirectUrl>,
+    pub requestReferenceNumber: Option<String>,
+    pub metadata: Option<MetaData>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[allow(non_snake_case)]
+pub struct PaymentToken {
+    pub paymentTokenId: String,
+    pub state: String,
+    pub createdAt: String,
+    pub updatedAt: String,
+    pub issuer: String,
 }
